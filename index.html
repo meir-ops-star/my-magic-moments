@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="he">
 <head>
@@ -6,7 +7,7 @@
     <title>רגעים של קסם</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Heebo:wght@400;700&display=swap');
-
+        
         :root {
             --primary-color: #ff69b4; /* ורוד בוהק */
             --secondary-color: #fce4ec; /* ורוד בהיר */
@@ -15,7 +16,6 @@
             --text-color-dark: #2c3e50;
             --text-color-light: #ffffff;
             --button-hover: #c0392b;
-            --cta-button-color: #e91e63;
         }
 
         body {
@@ -42,15 +42,6 @@
             overflow: hidden;
         }
 
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-
         .hero-image {
             width: 80%;
             max-width: 400px;
@@ -62,20 +53,18 @@
             transform: translate(-50%, -50%);
             transition: transform 0.8s ease-out;
             will-change: transform, opacity;
-            z-index: 2;
         }
-
-        /* Adjusted position to match the original image */
+        
         .hero-text {
             position: absolute;
-            top: 55%; /* Adjusted from 65% to a higher position */
+            top: 65%;
             left: 50%;
             transform: translateX(-50%);
             color: var(--text-color-light);
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-            z-index: 2;
+            z-index: 10;
             transition: transform 0.8s ease-out, opacity 0.8s ease-out;
             will-change: transform, opacity;
         }
@@ -108,49 +97,6 @@
             margin-bottom: 20px;
         }
 
-        .gallery-funnel {
-            margin-top: 40px;
-            text-align: center;
-        }
-        
-        .gallery-funnel h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--text-color-dark);
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-
-        .gallery-button {
-            background-color: var(--cta-button-color);
-            color: var(--text-color-light);
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            animation: pulse 2s infinite;
-        }
-
-        .gallery-button:hover {
-            background-color: var(--accent-color);
-            transform: scale(1.05);
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        
         .calendar-container {
             display: flex;
             flex-direction: column;
@@ -165,13 +111,13 @@
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
             transition: background-color 0.3s ease-in-out;
         }
-
+        
         h2 {
             color: var(--accent-color);
             margin: 0 0 15px;
             font-size: 1.5rem;
         }
-
+        
         .times-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -200,13 +146,14 @@
         .time-slot.selected {
             background-color: var(--accent-color);
             color: var(--text-color-light);
-            box-shadow: 0 0 15px var(--accent-color);
+            box-shadow: 0 0 15px var(--accent-color); /* אפקט זוהר */
             transform: scale(1.05);
         }
 
+        /* Modal styles */
         .modal {
-            display: none;
-            position: fixed;
+            display: none; 
+            position: fixed; 
             z-index: 100;
             left: 0;
             top: 0;
@@ -229,7 +176,7 @@
             opacity: 0;
             animation: modalFadeIn 0.3s forwards;
         }
-
+        
         .modal-message {
             font-size: 1.5rem;
             color: var(--text-color-dark);
@@ -276,22 +223,17 @@
 <body>
 
 <div class="hero-section">
-    <div id="particles-js"></div>
     <img id="hero-image" src="https://i.imgur.com/nXPL53n.jpeg" alt="תמונה רומנטית של שנינו" class="hero-image">
     <h1 class="hero-text">אז מתי אנחנו משחקים ברגעים של קסם?</h1>
 </div>
 
 <div class="container" id="main-container">
     <div class="calendar-container" id="calendar-container">
-    </div>
-    <div class="gallery-funnel">
-        <h2>יש עוד רגעים שאנחנו חייבים להזכר בהם...</h2>
-        <a href="https://your-photo-gallery-link.com" target="_blank" class="gallery-button">
-            גלי את הקסם הבא
-        </a>
+        <!-- התוכן ייווצר כאן באמצעות JavaScript -->
     </div>
 </div>
 
+<!-- The Modal -->
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close-button">&times;</span>
@@ -299,31 +241,8 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Particles.js Initialization
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 120, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#C0C0C0" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.6, "random": true, "anim": { "enable": true, "speed": 1.2, "opacity_min": 0.2, "sync": false } },
-                "size": { "value": 2.5, "random": true, "anim": { "enable": false } },
-                "line_linked": { "enable": false },
-                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
-            },
-            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "bubble" }, "onclick": { "enable": false }, "resize": true },
-                "modes": { "bubble": { "distance": 150, "size": 6, "duration": 2, "opacity": 1 } }
-            },
-            "retina_detect": true
-        });
-
-        const particlesCanvas = document.querySelector('#particles-js canvas');
-        if (particlesCanvas) {
-            particlesCanvas.style.boxShadow = '0 0 15px 8px rgba(255, 215, 0, 0.6)';
-        }
-
         const calendarContainer = document.getElementById('calendar-container');
         const mainContainer = document.getElementById('main-container');
         const heroImage = document.getElementById('hero-image');
@@ -331,6 +250,7 @@
         const modal = document.getElementById('myModal');
         const modalMessage = document.getElementById('modal-message');
         const closeBtn = document.querySelector('.close-button');
+        const timeSlots = document.querySelectorAll('.time-slot');
 
         const now = new Date();
         const today = new Date();
@@ -349,25 +269,29 @@
             heroImage.style.opacity = `${1 - scrollRatio}`;
 
             // Text animation (parallax effect)
-            const textParallaxOffset = -scrollY * 0.3;
-            heroText.style.transform = `translate(-50%, ${textParallaxOffset}px)`;
-            heroText.style.opacity = `${1 - scrollRatio}`;
-            
+            const textTranslateValue = 65 - scrollY * 0.3;
+            heroText.style.transform = `translate(-50%, ${textTranslateValue}%)`;
+
             // Container fade-in
             const containerPosition = mainContainer.getBoundingClientRect().top;
             const screenHeight = window.innerHeight;
             if (containerPosition < screenHeight / 1.5) {
                 mainContainer.classList.add('visible');
-            } else {
-                mainContainer.classList.remove('visible');
             }
         });
 
-        // Date generation logic - Corrected for 3 upcoming days
-        for (let i = 0; i < 3; i++) {
-            const nextDate = new Date(today);
-            nextDate.setDate(today.getDate() + i);
-            dates.push(nextDate);
+        // יצירת התאריכים ליומיים הקרובים (עד מוצ"ש בחצות)
+        const day = today.getDay(); // 0=Sunday, 1=Monday... 4=Thursday, 5=Friday, 6=Saturday
+        
+        if (day <= 4) { // אם היום יום חמישי או לפני
+            dates.push(new Date(today)); // היום (חמישי)
+            dates.push(new Date(today.setDate(today.getDate() + 1))); // מחר (שישי)
+            dates.push(new Date(today.setDate(today.getDate() + 1))); // מחרתיים (שבת)
+        } else if (day === 5) { // אם היום יום שישי
+            dates.push(new Date(today)); // היום (שישי)
+            dates.push(new Date(today.setDate(today.getDate() + 1))); // מחר (שבת)
+        } else if (day === 6) { // אם היום יום שבת
+            dates.push(new Date(today)); // היום (שבת)
         }
 
         const formatter = new Intl.DateTimeFormat('he-IL', { weekday: 'long', day: 'numeric', month: 'long' });
@@ -379,35 +303,46 @@
             const isSaturday = date.getDay() === 6;
 
             let hours = [];
-            const isToday = date.toDateString() === new Date().toDateString();
-
             if (isThursday) {
-                const startHour = isToday ? now.getHours() : -1;
-                if (startHour < 23) hours.push(23);
-                if (startHour === 23) hours.push(23);
+                // היום חמישי, החל מהשעה 23:00 עד חצות
+                const currentHour = now.getHours();
+                if (currentHour >= 23) {
+                     for (let i = 23; i < 24; i++) {
+                        hours.push(i);
+                    }
+                } else {
+                    hours.push(23);
+                }
             } else if (isFriday) {
-                hours = [8, 9, 10, 11, 12];
+                // יום שישי, מהבוקר עד 12:00
+                for (let i = 8; i <= 12; i++) {
+                    hours.push(i);
+                }
             } else if (isSaturday) {
-                hours = [21, 22, 23];
+                // מוצ"ש, 21:00-23:00
+                for (let i = 21; i <= 23; i++) {
+                    hours.push(i);
+                }
             }
-
-            if (hours.length > 0) {
-              const dayHTML = `
-                  <div class="day-column">
-                      <h2>${dayName}</h2>
-                      <div class="times-grid">
-                          ${hours.map(h => `<div class="time-slot" data-date="${date.toISOString().split('T')[0]}" data-time="${h}">${h}:00</div>`).join('')}
-                      </div>
-                  </div>
-              `;
-              calendarContainer.innerHTML += dayHTML;
-            }
+            
+            // יצירת HTML עבור כל יום
+            const dayHTML = `
+                <div class="day-column">
+                    <h2>${dayName}</h2>
+                    <div class="times-grid">
+                        ${hours.map(h => `<div class="time-slot" data-date="${date.toISOString().split('T')[0]}" data-time="${h}">${h}:00</div>`).join('')}
+                    </div>
+                </div>
+            `;
+            calendarContainer.innerHTML += dayHTML;
         });
 
         // Event listener for time slots
         calendarContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('time-slot')) {
+                // הסר בחירה קודמת מכל השעות
                 document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                // הוסף בחירה לשעה הנוכחית
                 e.target.classList.add('selected');
 
                 const selectedDate = e.target.getAttribute('data-date');
@@ -415,6 +350,7 @@
                 const selectedDateObj = new Date(selectedDate);
                 const dayName = new Intl.DateTimeFormat('he-IL', { weekday: 'long', day: 'numeric', month: 'long' }).format(selectedDateObj);
                 
+                // הודעה רומנטית חדשה
                 const message = `ההתרגשות כבר באוויר...<br> מצפה בקוצר רוח לרגעים הקסומים שלנו ב-**${dayName}**, בשעה **${selectedTime}:00** ♥`;
                 
                 modalMessage.innerHTML = message;
@@ -422,10 +358,12 @@
             }
         });
 
+        // Close modal when user clicks on close button
         closeBtn.addEventListener('click', () => {
             modal.style.display = 'none';
         });
 
+        // Close modal when user clicks outside of the modal content
         window.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
