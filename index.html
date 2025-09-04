@@ -15,6 +15,7 @@
             --text-color-dark: #2c3e50;
             --text-color-light: #ffffff;
             --button-hover: #c0392b;
+            --cta-button-color: #e91e63;
         }
 
         body {
@@ -39,32 +40,42 @@
             text-align: center;
             background-image: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
             overflow: hidden;
-            z-index: 1;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
         }
 
         .hero-image {
             width: 80%;
             max-width: 400px;
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             transition: transform 0.8s ease-out;
             will-change: transform, opacity;
+            z-index: 2;
         }
 
+        /* Adjusted position to match the original image */
         .hero-text {
             position: absolute;
-            top: 60%;
+            top: 55%; /* Adjusted from 65% to a higher position */
             left: 50%;
             transform: translateX(-50%);
             color: var(--text-color-light);
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-            z-index: 10;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            z-index: 2;
             transition: transform 0.8s ease-out, opacity 0.8s ease-out;
             will-change: transform, opacity;
         }
@@ -74,10 +85,10 @@
             max-width: 600px;
             background-color: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             padding: 40px 30px;
             text-align: center;
-            margin-top: -50px;
+            margin-top: -100px;
             position: relative;
             z-index: 10;
             transition: transform 0.8s ease-out, opacity 0.8s ease-out;
@@ -97,6 +108,49 @@
             margin-bottom: 20px;
         }
 
+        .gallery-funnel {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .gallery-funnel h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-color-dark);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .gallery-button {
+            background-color: var(--cta-button-color);
+            color: var(--text-color-light);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .gallery-button:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
         .calendar-container {
             display: flex;
             flex-direction: column;
@@ -108,7 +162,7 @@
             background-color: var(--secondary-color);
             padding: 20px;
             border-radius: 12px;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
             transition: background-color 0.3s ease-in-out;
         }
 
@@ -132,7 +186,7 @@
             cursor: pointer;
             transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
             font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             user-select: none;
         }
 
@@ -140,31 +194,25 @@
             background-color: var(--accent-color);
             color: var(--text-color-light);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .time-slot.selected {
             background-color: var(--accent-color);
             color: var(--text-color-light);
-            box-shadow: 0 0 15px var(--accent-color); /* אפקט זוהר */
+            box-shadow: 0 0 15px var(--accent-color);
             transform: scale(1.05);
         }
 
-        /* Modal styles */
         .modal {
             display: none;
-            /* Hidden by default */
             position: fixed;
-            /* Stay in place */
             z-index: 100;
-            /* Sit on top */
             left: 0;
             top: 0;
             width: 100%;
-            /* Full width */
             height: 100%;
-            /* Full height */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            background-color: rgba(0,0,0,0.4);
             justify-content: center;
             align-items: center;
         }
@@ -173,7 +221,7 @@
             background-color: var(--background-color);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             max-width: 80%;
             text-align: center;
             position: relative;
@@ -219,195 +267,172 @@
             .container {
                 padding: 30px 20px;
             }
-
             h1 {
                 font-size: 2rem;
             }
         }
     </style>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
-
 <body>
-    <div class="hero-section">
-        <img id="hero-image" src="https://i.imgur.com/nXPL53n.jpeg" alt="תמונה רומנטית של שנינו" class="hero-image">
-        <h1 class="hero-text">אז מתי אנחנו משחקים ברגעים של קסם?</h1>
+
+<div class="hero-section">
+    <div id="particles-js"></div>
+    <img id="hero-image" src="https://i.imgur.com/nXPL53n.jpeg" alt="תמונה רומנטית של שנינו" class="hero-image">
+    <h1 class="hero-text">אז מתי אנחנו משחקים ברגעים של קסם?</h1>
+</div>
+
+<div class="container" id="main-container">
+    <div class="calendar-container" id="calendar-container">
     </div>
-
-    <div class="container" id="main-container">
-        <div class="calendar-container" id="calendar-container">
-            <!-- התוכן ייווצר כאן באמצעות JavaScript -->
-        </div>
+    <div class="gallery-funnel">
+        <h2>יש עוד רגעים שאנחנו חייבים להזכר בהם...</h2>
+        <a href="https://your-photo-gallery-link.com" target="_blank" class="gallery-button">
+            גלי את הקסם הבא
+        </a>
     </div>
+</div>
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <p class="modal-message" id="modal-message"></p>
-        </div>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <p class="modal-message" id="modal-message"></p>
     </div>
+</div>
 
-    <script>
-        (function() {
-            emailjs.init("m3KO6TvkqJwBj2MAL");
-        })();
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const calendarContainer = document.getElementById('calendar-container');
-            const mainContainer = document.getElementById('main-container');
-            const heroImage = document.getElementById('hero-image');
-            const heroText = document.querySelector('.hero-text');
-            const modal = document.getElementById('myModal');
-            const modalMessage = document.getElementById('modal-message');
-            const closeBtn = document.querySelector('.close-button');
-
-            // Animation logic
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                const heroHeight = window.innerHeight;
-
-                const scrollRatio = Math.min(scrollY / heroHeight, 1);
-                
-                // אנימציית תמונה
-                const scaleValue = 1 - scrollRatio * 0.2;
-                const imageTranslateY = -50 - scrollY * 0.15;
-                heroImage.style.transform = `translate(-50%, ${imageTranslateY}%) scale(${scaleValue})`;
-                heroImage.style.opacity = `${1 - scrollRatio}`;
-
-                // אנימציית טקסט
-                const textTranslateY = scrollY * 0.1;
-                heroText.style.transform = `translateX(-50%) translateY(${textTranslateY}px)`;
-                heroText.style.opacity = `${1 - scrollRatio}`;
-
-                // הופעת הקונטיינר
-                const containerPosition = mainContainer.getBoundingClientRect().top;
-                const screenHeight = window.innerHeight;
-                if (containerPosition < screenHeight / 1.5) {
-                    mainContainer.classList.add('visible');
-                } else {
-                    mainContainer.classList.remove('visible');
-                }
-            });
-            
-            // יצירת התאריכים (מהיום ועד מוצאי שבת/ראשון, בהתאם ליום הנוכחי)
-            const dates = [];
-            const today = new Date();
-            today.setHours(12, 0, 0, 0); // מניעת בעיות אזור זמן
-            const todayIndex = today.getDay(); // 0=ראשון, 1=שני... 5=שישי, 6=שבת
-
-            // מציאת יום שישי הקרוב או הנוכחי
-            let fridayDate = new Date(today);
-            let daysUntilFriday = (5 - todayIndex + 7) % 7;
-            if (daysUntilFriday === 0 && today.getHours() >= 13) {
-                 daysUntilFriday = 7;
-            }
-            fridayDate.setDate(today.getDate() + daysUntilFriday);
-            fridayDate.setHours(12, 0, 0, 0);
-            
-            const saturdayDate = new Date(fridayDate);
-            saturdayDate.setDate(fridayDate.getDate() + 1);
-            saturdayDate.setHours(12, 0, 0, 0);
-
-            const sundayDate = new Date(saturdayDate);
-            sundayDate.setDate(saturdayDate.getDate() + 1);
-            sundayDate.setHours(12, 0, 0, 0);
-
-            dates.push(fridayDate);
-            dates.push(saturdayDate);
-            dates.push(sundayDate);
-
-            const formatter = new Intl.DateTimeFormat('he-IL', {
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long'
-            });
-
-            dates.forEach(date => {
-                const currentDayOfWeek = date.getDay();
-                let dayName = formatter.format(date);
-
-                if (currentDayOfWeek === 6) {
-                    dayName = "מוצאי שבת";
-                }
-
-                let hours = [];
-                if (currentDayOfWeek === 5) {
-                    for (let i = 8; i <= 12; i++) {
-                        hours.push(i);
-                    }
-                } else if (currentDayOfWeek === 6 || currentDayOfWeek === 0) {
-                    for (let i = 21; i <= 23; i++) {
-                        hours.push(i);
-                    }
-                }
-
-                const dayHTML = `
-                <div class="day-column">
-                    <h2>${dayName}</h2>
-                    <div class="times-grid">
-                        ${hours.map(h => `<div class="time-slot" data-date="${date.toISOString().split('T')[0]}" data-time="${h}">${h}:00</div>`).join('')}
-                    </div>
-                </div>
-            `;
-                calendarContainer.innerHTML += dayHTML;
-            });
-
-            // Event listener for time slots
-            calendarContainer.addEventListener('click', (e) => {
-                if (e.target.classList.contains('time-slot')) {
-                    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-                    e.target.classList.add('selected');
-
-                    const selectedDate = e.target.getAttribute('data-date');
-                    const selectedTime = e.target.getAttribute('data-time');
-
-                    const selectedDateObj = new Date(selectedDate);
-                    selectedDateObj.setHours(12, 0, 0, 0);
-                    const dayName = new Intl.DateTimeFormat('he-IL', {
-                        weekday: 'long',
-                        day: 'numeric',
-                        month: 'long'
-                    }).format(selectedDateObj);
-
-                    const templateParams = {
-                        day_name: dayName,
-                        selected_time: selectedTime,
-                        to_email: "meirmink@gmail.com, rutymink@gmail.com" // שלח את שני המיילים כנמען יחיד
-                    };
-
-                    const serviceID = 'service_d60kr7x';
-                    const templateID = 'template_goit77g';
-
-                    emailjs.send(serviceID, templateID, templateParams)
-                        .then(() => {
-                            const message = `ההתרגשות כבר באוויר...<br>
-                                        מצפה בקוצר רוח לרגעים הקסומים שלנו ב-**${dayName}**, בשעה **${selectedTime}:00** ♥
-                                        <br><br>
-                                        ההודעה נשלחה בהצלחה לכתובות **meirmink@gmail.com** ו-**rutymink@gmail.com**!`;
-                            modalMessage.innerHTML = message;
-                            modal.style.display = 'flex';
-                        }, (error) => {
-                            const message = `אופס, משהו השתבש...<br>לא הצלחנו לשלוח את המייל. אנא נסה שוב מאוחר יותר.`;
-                            console.error('EmailJS Error:', error);
-                            modalMessage.innerHTML = message;
-                            modal.style.display = 'flex';
-                        });
-                }
-            });
-
-            // Close modal when user clicks on close button
-            closeBtn.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
-
-            // Close modal when user clicks outside of the modal content
-            window.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Particles.js Initialization
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 120, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#C0C0C0" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.6, "random": true, "anim": { "enable": true, "speed": 1.2, "opacity_min": 0.2, "sync": false } },
+                "size": { "value": 2.5, "random": true, "anim": { "enable": false } },
+                "line_linked": { "enable": false },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "bubble" }, "onclick": { "enable": false }, "resize": true },
+                "modes": { "bubble": { "distance": 150, "size": 6, "duration": 2, "opacity": 1 } }
+            },
+            "retina_detect": true
         });
-    </script>
+
+        const particlesCanvas = document.querySelector('#particles-js canvas');
+        if (particlesCanvas) {
+            particlesCanvas.style.boxShadow = '0 0 15px 8px rgba(255, 215, 0, 0.6)';
+        }
+
+        const calendarContainer = document.getElementById('calendar-container');
+        const mainContainer = document.getElementById('main-container');
+        const heroImage = document.getElementById('hero-image');
+        const heroText = document.querySelector('.hero-text');
+        const modal = document.getElementById('myModal');
+        const modalMessage = document.getElementById('modal-message');
+        const closeBtn = document.querySelector('.close-button');
+
+        const now = new Date();
+        const today = new Date();
+        const dates = [];
+
+        // Animation logic
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const heroHeight = window.innerHeight;
+            const scrollRatio = Math.min(scrollY / (heroHeight * 0.8), 1);
+            
+            // Image animation
+            const scaleValue = 1 - scrollRatio * 0.5;
+            const translateValue = -50 - scrollY * 0.5;
+            heroImage.style.transform = `translate(-50%, ${translateValue}%) scale(${scaleValue})`;
+            heroImage.style.opacity = `${1 - scrollRatio}`;
+
+            // Text animation (parallax effect)
+            const textParallaxOffset = -scrollY * 0.3;
+            heroText.style.transform = `translate(-50%, ${textParallaxOffset}px)`;
+            heroText.style.opacity = `${1 - scrollRatio}`;
+            
+            // Container fade-in
+            const containerPosition = mainContainer.getBoundingClientRect().top;
+            const screenHeight = window.innerHeight;
+            if (containerPosition < screenHeight / 1.5) {
+                mainContainer.classList.add('visible');
+            } else {
+                mainContainer.classList.remove('visible');
+            }
+        });
+
+        // Date generation logic - Corrected for 3 upcoming days
+        for (let i = 0; i < 3; i++) {
+            const nextDate = new Date(today);
+            nextDate.setDate(today.getDate() + i);
+            dates.push(nextDate);
+        }
+
+        const formatter = new Intl.DateTimeFormat('he-IL', { weekday: 'long', day: 'numeric', month: 'long' });
+
+        dates.forEach(date => {
+            const dayName = formatter.format(date);
+            const isThursday = date.getDay() === 4;
+            const isFriday = date.getDay() === 5;
+            const isSaturday = date.getDay() === 6;
+
+            let hours = [];
+            const isToday = date.toDateString() === new Date().toDateString();
+
+            if (isThursday) {
+                const startHour = isToday ? now.getHours() : -1;
+                if (startHour < 23) hours.push(23);
+                if (startHour === 23) hours.push(23);
+            } else if (isFriday) {
+                hours = [8, 9, 10, 11, 12];
+            } else if (isSaturday) {
+                hours = [21, 22, 23];
+            }
+
+            if (hours.length > 0) {
+              const dayHTML = `
+                  <div class="day-column">
+                      <h2>${dayName}</h2>
+                      <div class="times-grid">
+                          ${hours.map(h => `<div class="time-slot" data-date="${date.toISOString().split('T')[0]}" data-time="${h}">${h}:00</div>`).join('')}
+                      </div>
+                  </div>
+              `;
+              calendarContainer.innerHTML += dayHTML;
+            }
+        });
+
+        // Event listener for time slots
+        calendarContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('time-slot')) {
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                e.target.classList.add('selected');
+
+                const selectedDate = e.target.getAttribute('data-date');
+                const selectedTime = e.target.getAttribute('data-time');
+                const selectedDateObj = new Date(selectedDate);
+                const dayName = new Intl.DateTimeFormat('he-IL', { weekday: 'long', day: 'numeric', month: 'long' }).format(selectedDateObj);
+                
+                const message = `ההתרגשות כבר באוויר...<br> מצפה בקוצר רוח לרגעים הקסומים שלנו ב-**${dayName}**, בשעה **${selectedTime}:00** ♥`;
+                
+                modalMessage.innerHTML = message;
+                modal.style.display = 'flex';
+            }
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
