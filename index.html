@@ -6,7 +6,7 @@
     <title>רגעים של קסם</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Heebo:wght@400;700&display=swap');
-        
+
         :root {
             --primary-color: #ff69b4; /* ורוד בוהק */
             --secondary-color: #fce4ec; /* ורוד בהיר */
@@ -39,13 +39,14 @@
             text-align: center;
             background-image: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
             overflow: hidden;
+            z-index: 1;
         }
 
         .hero-image {
             width: 80%;
             max-width: 400px;
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             position: absolute;
             top: 50%;
             left: 50%;
@@ -53,16 +54,16 @@
             transition: transform 0.8s ease-out;
             will-change: transform, opacity;
         }
-        
+
         .hero-text {
             position: absolute;
-            top: 65%;
+            top: 60%;
             left: 50%;
             transform: translateX(-50%);
             color: var(--text-color-light);
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
             z-index: 10;
             transition: transform 0.8s ease-out, opacity 0.8s ease-out;
             will-change: transform, opacity;
@@ -73,10 +74,10 @@
             max-width: 600px;
             background-color: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             padding: 40px 30px;
             text-align: center;
-            margin-top: -100px;
+            margin-top: -50px;
             position: relative;
             z-index: 10;
             transition: transform 0.8s ease-out, opacity 0.8s ease-out;
@@ -107,16 +108,16 @@
             background-color: var(--secondary-color);
             padding: 20px;
             border-radius: 12px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
             transition: background-color 0.3s ease-in-out;
         }
-        
+
         h2 {
             color: var(--accent-color);
             margin: 0 0 15px;
             font-size: 1.5rem;
         }
-        
+
         .times-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -131,7 +132,7 @@
             cursor: pointer;
             transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
             font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             user-select: none;
         }
 
@@ -139,7 +140,7 @@
             background-color: var(--accent-color);
             color: var(--text-color-light);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .time-slot.selected {
@@ -151,14 +152,19 @@
 
         /* Modal styles */
         .modal {
-            display: none; 
-            position: fixed; 
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
             z-index: 100;
+            /* Sit on top */
             left: 0;
             top: 0;
             width: 100%;
+            /* Full width */
             height: 100%;
-            background-color: rgba(0,0,0,0.4);
+            /* Full height */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
             justify-content: center;
             align-items: center;
         }
@@ -167,7 +173,7 @@
             background-color: var(--background-color);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             max-width: 80%;
             text-align: center;
             position: relative;
@@ -175,7 +181,7 @@
             opacity: 0;
             animation: modalFadeIn 0.3s forwards;
         }
-        
+
         .modal-message {
             font-size: 1.5rem;
             color: var(--text-color-dark);
@@ -213,119 +219,130 @@
             .container {
                 padding: 30px 20px;
             }
+
             h1 {
                 font-size: 2rem;
             }
         }
     </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
+
 <body>
-
-<div class="hero-section">
-    <img id="hero-image" src="https://i.imgur.com/nXPL53n.jpeg" alt="תמונה רומנטית של שנינו" class="hero-image">
-    <h1 class="hero-text">אז מתי אנחנו משחקים ברגעים של קסם?</h1>
-</div>
-
-<div class="container" id="main-container">
-    <div class="calendar-container" id="calendar-container">
-        <!-- התוכן ייווצר כאן באמצעות JavaScript -->
+    <div class="hero-section">
+        <img id="hero-image" src="https://i.imgur.com/nXPL53n.jpeg" alt="תמונה רומנטית של שנינו" class="hero-image">
+        <h1 class="hero-text">אז מתי אנחנו משחקים ברגעים של קסם?</h1>
     </div>
-</div>
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <p class="modal-message" id="modal-message"></p>
+    <div class="container" id="main-container">
+        <div class="calendar-container" id="calendar-container">
+            <!-- התוכן ייווצר כאן באמצעות JavaScript -->
+        </div>
     </div>
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const calendarContainer = document.getElementById('calendar-container');
-        const mainContainer = document.getElementById('main-container');
-        const heroImage = document.getElementById('hero-image');
-        const heroText = document.querySelector('.hero-text');
-        const modal = document.getElementById('myModal');
-        const modalMessage = document.getElementById('modal-message');
-        const closeBtn = document.querySelector('.close-button');
-        const timeSlots = document.querySelectorAll('.time-slot');
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p class="modal-message" id="modal-message"></p>
+        </div>
+    </div>
 
-        const now = new Date();
-        const today = new Date();
-        const dates = [];
+    <script>
+        (function() {
+            emailjs.init("m3KO6TvkqJwBj2MAL");
+        })();
 
-        // Animation logic
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const heroHeight = window.innerHeight;
-            const scrollRatio = Math.min(scrollY / (heroHeight * 0.8), 1);
+        document.addEventListener('DOMContentLoaded', () => {
+            const calendarContainer = document.getElementById('calendar-container');
+            const mainContainer = document.getElementById('main-container');
+            const heroImage = document.getElementById('hero-image');
+            const heroText = document.querySelector('.hero-text');
+            const modal = document.getElementById('myModal');
+            const modalMessage = document.getElementById('modal-message');
+            const closeBtn = document.querySelector('.close-button');
+
+            // Animation logic
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const heroHeight = window.innerHeight;
+
+                const scrollRatio = Math.min(scrollY / heroHeight, 1);
+                
+                // אנימציית תמונה
+                const scaleValue = 1 - scrollRatio * 0.2;
+                const imageTranslateY = -50 - scrollY * 0.15;
+                heroImage.style.transform = `translate(-50%, ${imageTranslateY}%) scale(${scaleValue})`;
+                heroImage.style.opacity = `${1 - scrollRatio}`;
+
+                // אנימציית טקסט
+                const textTranslateY = scrollY * 0.1;
+                heroText.style.transform = `translateX(-50%) translateY(${textTranslateY}px)`;
+                heroText.style.opacity = `${1 - scrollRatio}`;
+
+                // הופעת הקונטיינר
+                const containerPosition = mainContainer.getBoundingClientRect().top;
+                const screenHeight = window.innerHeight;
+                if (containerPosition < screenHeight / 1.5) {
+                    mainContainer.classList.add('visible');
+                } else {
+                    mainContainer.classList.remove('visible');
+                }
+            });
             
-            // Image animation
-            const scaleValue = 1 - scrollRatio * 0.5;
-            const translateValue = -50 - scrollY * 0.5;
-            heroImage.style.transform = `translate(-50%, ${translateValue}%) scale(${scaleValue})`;
-            heroImage.style.opacity = `${1 - scrollRatio}`;
+            // יצירת התאריכים (מהיום ועד מוצאי שבת/ראשון, בהתאם ליום הנוכחי)
+            const dates = [];
+            const today = new Date();
+            today.setHours(12, 0, 0, 0); // מניעת בעיות אזור זמן
+            const todayIndex = today.getDay(); // 0=ראשון, 1=שני... 5=שישי, 6=שבת
 
-            // Text animation (parallax effect)
-            const textTranslateValue = 65 - scrollY * 0.3;
-            heroText.style.transform = `translate(-50%, ${textTranslateValue}%)`;
-
-            // Container fade-in
-            const containerPosition = mainContainer.getBoundingClientRect().top;
-            const screenHeight = window.innerHeight;
-            if (containerPosition < screenHeight / 1.5) {
-                mainContainer.classList.add('visible');
+            // מציאת יום שישי הקרוב או הנוכחי
+            let fridayDate = new Date(today);
+            let daysUntilFriday = (5 - todayIndex + 7) % 7;
+            if (daysUntilFriday === 0 && today.getHours() >= 13) {
+                 daysUntilFriday = 7;
             }
-        });
+            fridayDate.setDate(today.getDate() + daysUntilFriday);
+            fridayDate.setHours(12, 0, 0, 0);
+            
+            const saturdayDate = new Date(fridayDate);
+            saturdayDate.setDate(fridayDate.getDate() + 1);
+            saturdayDate.setHours(12, 0, 0, 0);
 
-        // יצירת התאריכים ליומיים הקרובים (עד מוצ"ש בחצות)
-        const day = today.getDay(); // 0=Sunday, 1=Monday... 4=Thursday, 5=Friday, 6=Saturday
-        
-        if (day <= 4) { // אם היום יום חמישי או לפני
-            dates.push(new Date(today)); // היום (חמישי)
-            dates.push(new Date(today.setDate(today.getDate() + 1))); // מחר (שישי)
-            dates.push(new Date(today.setDate(today.getDate() + 1))); // מחרתיים (שבת)
-        } else if (day === 5) { // אם היום יום שישי
-            dates.push(new Date(today)); // היום (שישי)
-            dates.push(new Date(today.setDate(today.getDate() + 1))); // מחר (שבת)
-        } else if (day === 6) { // אם היום יום שבת
-            dates.push(new Date(today)); // היום (שבת)
-        }
+            const sundayDate = new Date(saturdayDate);
+            sundayDate.setDate(saturdayDate.getDate() + 1);
+            sundayDate.setHours(12, 0, 0, 0);
 
-        const formatter = new Intl.DateTimeFormat('he-IL', { weekday: 'long', day: 'numeric', month: 'long' });
+            dates.push(fridayDate);
+            dates.push(saturdayDate);
+            dates.push(sundayDate);
 
-        dates.forEach(date => {
-            const dayName = formatter.format(date);
-            const isThursday = date.getDay() === 4;
-            const isFriday = date.getDay() === 5;
-            const isSaturday = date.getDay() === 6;
+            const formatter = new Intl.DateTimeFormat('he-IL', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long'
+            });
 
-            let hours = [];
-            if (isThursday) {
-                // היום חמישי, החל מהשעה 23:00 עד חצות
-                const currentHour = now.getHours();
-                if (currentHour >= 23) {
-                     for (let i = 23; i < 24; i++) {
+            dates.forEach(date => {
+                const currentDayOfWeek = date.getDay();
+                let dayName = formatter.format(date);
+
+                if (currentDayOfWeek === 6) {
+                    dayName = "מוצאי שבת";
+                }
+
+                let hours = [];
+                if (currentDayOfWeek === 5) {
+                    for (let i = 8; i <= 12; i++) {
                         hours.push(i);
                     }
-                } else {
-                    hours.push(23);
+                } else if (currentDayOfWeek === 6 || currentDayOfWeek === 0) {
+                    for (let i = 21; i <= 23; i++) {
+                        hours.push(i);
+                    }
                 }
-            } else if (isFriday) {
-                // יום שישי, מהבוקר עד 12:00
-                for (let i = 8; i <= 12; i++) {
-                    hours.push(i);
-                }
-            } else if (isSaturday) {
-                // מוצ"ש, 21:00-23:00
-                for (let i = 21; i <= 23; i++) {
-                    hours.push(i);
-                }
-            }
-            
-            // יצירת HTML עבור כל יום
-            const dayHTML = `
+
+                const dayHTML = `
                 <div class="day-column">
                     <h2>${dayName}</h2>
                     <div class="times-grid">
@@ -333,43 +350,64 @@
                     </div>
                 </div>
             `;
-            calendarContainer.innerHTML += dayHTML;
-        });
+                calendarContainer.innerHTML += dayHTML;
+            });
 
-        // Event listener for time slots
-        calendarContainer.addEventListener('click', (e) => {
-            if (e.target.classList.contains('time-slot')) {
-                // הסר בחירה קודמת מכל השעות
-                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-                // הוסף בחירה לשעה הנוכחית
-                e.target.classList.add('selected');
+            // Event listener for time slots
+            calendarContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('time-slot')) {
+                    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                    e.target.classList.add('selected');
 
-                const selectedDate = e.target.getAttribute('data-date');
-                const selectedTime = e.target.getAttribute('data-time');
-                const selectedDateObj = new Date(selectedDate);
-                const dayName = new Intl.DateTimeFormat('he-IL', { weekday: 'long', day: 'numeric', month: 'long' }).format(selectedDateObj);
-                
-                // הודעה רומנטית חדשה
-                const message = `ההתרגשות כבר באוויר...<br> מצפה בקוצר רוח לרגעים הקסומים שלנו ב-**${dayName}**, בשעה **${selectedTime}:00** ♥`;
-                
-                modalMessage.innerHTML = message;
-                modal.style.display = 'flex';
-            }
-        });
+                    const selectedDate = e.target.getAttribute('data-date');
+                    const selectedTime = e.target.getAttribute('data-time');
 
-        // Close modal when user clicks on close button
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
+                    const selectedDateObj = new Date(selectedDate);
+                    selectedDateObj.setHours(12, 0, 0, 0);
+                    const dayName = new Intl.DateTimeFormat('he-IL', {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long'
+                    }).format(selectedDateObj);
 
-        // Close modal when user clicks outside of the modal content
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
+                    const templateParams = {
+                        day_name: dayName,
+                        selected_time: selectedTime,
+                        to_email: "meirmink@gmail.com, rutymink@gmail.com" // שלח את שני המיילים כנמען יחיד
+                    };
+
+                    const serviceID = 'service_d60kr7x';
+                    const templateID = 'template_goit77g';
+
+                    emailjs.send(serviceID, templateID, templateParams)
+                        .then(() => {
+                            const message = `ההתרגשות כבר באוויר...<br>
+                                        מצפה בקוצר רוח לרגעים הקסומים שלנו ב-**${dayName}**, בשעה **${selectedTime}:00** ♥
+                                        <br><br>
+                                        ההודעה נשלחה בהצלחה לכתובות **meirmink@gmail.com** ו-**rutymink@gmail.com**!`;
+                            modalMessage.innerHTML = message;
+                            modal.style.display = 'flex';
+                        }, (error) => {
+                            const message = `אופס, משהו השתבש...<br>לא הצלחנו לשלוח את המייל. אנא נסה שוב מאוחר יותר.`;
+                            console.error('EmailJS Error:', error);
+                            modalMessage.innerHTML = message;
+                            modal.style.display = 'flex';
+                        });
+                }
+            });
+
+            // Close modal when user clicks on close button
+            closeBtn.addEventListener('click', () => {
                 modal.style.display = 'none';
-            }
-        });
-    });
-</script>
+            });
 
+            // Close modal when user clicks outside of the modal content
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
