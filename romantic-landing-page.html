@@ -149,20 +149,64 @@
             transform: scale(1.05);
         }
 
-        #confirmation-message {
-            margin-top: 25px;
-            font-size: 1.2rem;
-            color: var(--text-color-dark);
-            padding: 15px;
-            background-color: var(--secondary-color);
-            border-radius: 10px;
-            display: none;
-            animation: fadeIn 0.5s ease-in-out;
+        /* Modal styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .modal-content {
+            background-color: var(--background-color);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-width: 80%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            animation: modalFadeIn 0.3s forwards;
+        }
+        
+        .modal-message {
+            font-size: 1.5rem;
+            color: var(--text-color-dark);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+        }
+
+        .close-button {
+            color: var(--text-color-dark);
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-button:hover {
+            color: var(--accent-color);
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         @media (max-width: 480px) {
@@ -186,16 +230,26 @@
     <div class="calendar-container" id="calendar-container">
         <!-- התוכן ייווצר כאן באמצעות JavaScript -->
     </div>
-    <div id="confirmation-message"></div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <p class="modal-message" id="modal-message"></p>
+    </div>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const calendarContainer = document.getElementById('calendar-container');
-        const messageContainer = document.getElementById('confirmation-message');
         const mainContainer = document.getElementById('main-container');
         const heroImage = document.getElementById('hero-image');
         const heroText = document.querySelector('.hero-text');
+        const modal = document.getElementById('myModal');
+        const modalMessage = document.getElementById('modal-message');
+        const closeBtn = document.querySelector('.close-button');
+        const timeSlots = document.querySelectorAll('.time-slot');
 
         const now = new Date();
         const today = new Date();
@@ -282,10 +336,12 @@
             calendarContainer.innerHTML += dayHTML;
         });
 
-        const timeSlots = document.querySelectorAll('.time-slot');
-        timeSlots.forEach(slot => {
-            slot.addEventListener('click', (e) => {
-                timeSlots.forEach(s => s.classList.remove('selected'));
+        // Event listener for time slots
+        calendarContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('time-slot')) {
+                // הסר בחירה קודמת מכל השעות
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                // הוסף בחירה לשעה הנוכחית
                 e.target.classList.add('selected');
 
                 const selectedDate = e.target.getAttribute('data-date');
@@ -294,11 +350,23 @@
                 const dayName = new Intl.DateTimeFormat('he-IL', { weekday: 'long', day: 'numeric', month: 'long' }).format(selectedDateObj);
                 
                 // הודעה רומנטית חדשה
-                const message = `ההתרגשות כבר באוויר... מצפה בקוצר רוח לרגעים הקסומים שלנו ב-<br> **${dayName}**, בשעה **${selectedTime}:00** ♥`;
+                const message = `ההתרגשות כבר באוויר...<br> מצפה בקוצר רוח לרגעים הקסומים שלנו ב-**${dayName}**, בשעה **${selectedTime}:00** ♥`;
                 
-                messageContainer.innerHTML = message;
-                messageContainer.style.display = 'block';
-            });
+                modalMessage.innerHTML = message;
+                modal.style.display = 'flex';
+            }
+        });
+
+        // Close modal when user clicks on close button
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when user clicks outside of the modal content
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
         });
     });
 </script>
